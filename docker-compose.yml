@@ -1,0 +1,13 @@
+networks:
+  shared-network:
+    external: true
+services:
+  fastapi:
+    build: .
+    container_name: "backend-api"
+    ports:
+      - 8000:8000
+    volumes:
+     - ./app:/code/app
+    networks:
+      - shared-network
