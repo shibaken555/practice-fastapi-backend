@@ -40,7 +40,7 @@ async def fetch_stocks(ticker_symbol):
             {"company_info": "存在しないティッカーシンボルです"},
         ]
     else:
-        company_info = company_info.get("longBusinessSummary")
+        company_info = company.get("longBusinessSummary")
         return [{"ticker_symbol": ticker_symbol}, {"company_info": company_info}]
 
 
