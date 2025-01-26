@@ -13,8 +13,8 @@ async def fetch_stocks(ticker_symbol):
     company_info = input_ticker_symbol.info
     if company_info.get("trailingPegRatio") is None:
         return {
-            {"ticker_symbol": ticker_symbol},
-            {"company_info": "存在しないティッカーシンボルです"},
+            "ticker_symbol": ticker_symbol,
+            "company_info": "存在しないティッカーシンボルです",
         }
     else:
         # 企業名、株価、時価総額を取得し返却する
@@ -41,7 +41,7 @@ async def fetch_stocks(ticker_symbol):
         }
     else:
         company_info = company.get("longBusinessSummary")
-        return [{"ticker_symbol": ticker_symbol}, {"company_info": company_info}]
+        return {"ticker_symbol": ticker_symbol, "company_info": company_info}
 
 
 # 入力したティッカーシンボルに合致する企業の株価を返却するAPI
@@ -50,8 +50,9 @@ async def fetch_price(ticker_symbol: str, period: str):
     ticker = yf.Ticker(ticker_symbol)
     price_history = ticker.history(period=period)
     if price_history.empty:
-        return {"ticker_symbol": ticker_symbol}, {
-            "price_data": "正しい期間を入力してください"
+        return {
+            "ticker_symbol": ticker_symbol,
+            "price_data": "正しい期間を入力してください",
         }
     else:
         # price_historyの型がDataFrameでありそのままだとフロントにreturn出来ないので
